@@ -1,13 +1,15 @@
 import React from 'react' // Not required in modern days
 import PropTypes from 'prop-types'
+// import About from './About';
 
 import './App.css';
+import { Link } from 'react-router-dom';
 
 // For Getting React Functional based Components type rfc
 export default function Navbar(props) {
   // Right here I have ued Default parameters Instead of using a defaultProps function in this file
   let setModeMessage = () => {
-    if (props.mode == 'light') {
+    if (props.mode === 'light') {
       return 'Switch to Light Mode';
     }
     else { return 'Switch to Dark Mode'; }
@@ -27,7 +29,10 @@ export default function Navbar(props) {
                 <a className="nav-link active" aria-current="page" href="#">Home</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#" >{props.link}</a>
+
+                {/* Look at the Link statement  */}
+
+                <Link className="nav-link" to='/About' >About</Link>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

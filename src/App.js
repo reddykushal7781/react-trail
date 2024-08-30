@@ -5,7 +5,7 @@ import TextForm from './TextForm';
 import About from './About';
 import { useState } from 'react';
 import Alert from './Alert.js';
-// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -23,7 +23,7 @@ function App() {
   }
 
   const toggleMode = () => {
-    if (mode == 'light') {
+    if (mode === 'light') {
       setMode('dark');
       document.body.style.backgroundColor = '#732d2d';
       showAlert('Turned into Dark Mode','info')
@@ -49,18 +49,38 @@ function App() {
   return (
     <>
       
-      {/* <BrowserRouter> */}
-        {/* <Routes> */}
-          <Route path='/' element={ <Navbar title="Cool!" link="Links" mode={mode} toggleMode={toggleMode} />} />  
-        {/* </Routes> */}
-      {/* </BrowserRouter> */}
-      <Navbar title="Cool!" link="Links" mode={mode} toggleMode={toggleMode} />
-      <Alert alert1={ alert} />
-      < TextForm mode={mode} showAlert={ showAlert} />
+      <BrowserRouter> 
+        <Routes>
+
+          {/* Look at 'exact' keyword */}
+
+          <Route exact path='/' element={
+            <>
+              
+              <Navbar title="Cool!" link="Links" mode={mode} toggleMode={toggleMode} />
+              <Alert alert1={ alert} />
+              < TextForm mode={mode} showAlert={showAlert} />
+              
+            </>
+          } />
+          
+          <Route path='/About' element={<>
+            <Navbar title="Cool!" link="Links" mode={mode} toggleMode={toggleMode} />
+            <Alert alert1={ alert} />
+            <About mode={ mode} />
+          </>
+          } />
+
+
+        </Routes>
+      </BrowserRouter>
+      {/* <Navbar title="Cool!" link="Links" mode={mode} toggleMode={toggleMode} /> */}
+      
+      {/* < TextForm mode={mode} showAlert={ showAlert} /> */}
       {/* <About/> */}
+      {/* <br></br>
       <br></br>
-      <br></br>
-      <br></br>
+      <br></br> */}
       {/* <l1> Hello { greeting}</l1> */}
     </>
   );

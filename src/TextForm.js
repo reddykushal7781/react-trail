@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
 export default function TextForm(props) {
 
@@ -9,7 +9,14 @@ export default function TextForm(props) {
         // console.log('setUpperCase');
         let newText = text.toLocaleUpperCase();
         setText(newText);
-        props.showAlert('Converted to upper case', 'success');
+        props.showAlert('Converted to Upper case', 'success');
+    }
+
+    function setLowerCase1() {
+        // console.log('setUpperCase');
+        let newText = text.toLocaleLowerCase();
+        setText(newText);
+        props.showAlert('Converted to Lower case', 'success');
     }
 
     function handleChange(event) { // event can also be written as e
@@ -24,8 +31,8 @@ export default function TextForm(props) {
         else {
             // setNumberOfWords(text.split(' ').length);
             let requiredIndex = text.lastIndexOf(' ');
-            console.log(requiredIndex);
-            console.log(requiredIndex);
+            // console.log(requiredIndex);
+            // console.log(requiredIndex);
 
             setCurrentElement(text.substring(requiredIndex + 1, text.trim().length));
             setNumberOrNot(getNumberOrNot(text.slice(requiredIndex + 1, text.length - 1)));
@@ -77,22 +84,28 @@ export default function TextForm(props) {
     const [numberOrNot, setNumberOrNot] = useState("");
     return (
         <>
-            <div className="container" style={{ color: props.mode == 'dark' ? 'white' : 'black' }}>
+            <div className="container" style={{ color: props.mode === 'dark' ? 'white' : 'black' }}>
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlTextarea1" className="form-label" >Add Some Text</label>
                     <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" value={text}
-                        onChange={handleChange} style={{ backgroundColor: props.mode === 'light' ? 'white' : 'grey', color: props.mode == 'dark' ? 'white' : 'black' }}></textarea>
+                        onChange={handleChange} style={{ backgroundColor: props.mode === 'light' ? 'white' : 'grey', color: props.mode === 'dark' ? 'white' : 'black' }}></textarea>
                 </div>
-                <button className='btn btn-primary ' onClick={setUpperCase1}>Convert</button>
-                <button type="button" className="btn btn-outline-danger mx-4 my-5" onClick={handleDelete}>Clear</button>
+                <button className='btn btn-primary ' onClick={setUpperCase1}>Convert Up</button>
+                <button className='btn btn-primary mx-3 ' onClick={setLowerCase1} >Convert Small</button>
+                <button type="button" className="btn btn-outline-danger mx-2 my-3" onClick={handleDelete}>Clear</button>
             </div>
 
             
             {/* here the mx refers to margin on x axis and vice versa */}
 
-            <div className="container my-4" style={{ color: props.mode == 'dark' ? 'white' : 'black' }}>
+            <div className="container my-4" style={{ color: props.mode === 'dark' ? 'white' : 'black' }}>
                 {/* if({text.length > 0} && { }) */}
-                <p>{numberOfWords} Words and {text.length} Characters</p>
+                <p>{
+                    text.split(" ").filter((element) => { 
+                        return element.length != 0;
+                    }).length
+                }{ " "}
+                    Words and {text.length} Characters</p>
                 <p>{number} Numbers</p>
                 <p>{currentElement} is a {numberOrNot}</p>
                 <h2>Preview</h2>
