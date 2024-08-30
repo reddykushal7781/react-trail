@@ -86,13 +86,14 @@ export default function TextForm(props) {
         <>
             <div className="container" style={{ color: props.mode === 'dark' ? 'white' : 'black' }}>
                 <div className="mb-3">
-                    <label htmlFor="exampleFormControlTextarea1" className="form-label" >Add Some Text</label>
+                    <h1 className='mb-10 mu-10 mx-10'>Give Your Text</h1>
+                    {/* <label htmlFor="exampleFormControlTextarea1" className="form-label" >Add Some Text</label> */}
                     <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" value={text}
                         onChange={handleChange} style={{ backgroundColor: props.mode === 'light' ? 'white' : 'grey', color: props.mode === 'dark' ? 'white' : 'black' }}></textarea>
                 </div>
-                <button className='btn btn-primary ' onClick={setUpperCase1}>Convert Up</button>
-                <button className='btn btn-primary mx-3 ' onClick={setLowerCase1} >Convert Small</button>
-                <button type="button" className="btn btn-outline-danger mx-2 my-3" onClick={handleDelete}>Clear</button>
+                <button disabled={ text.length===0} className='btn btn-primary ' onClick={setUpperCase1}>Convert Up</button>
+                <button disabled={ text.length===0} className='btn btn-primary mx-3 ' onClick={setLowerCase1} >Convert Small</button>
+                <button disabled={ text.length===0} type="button" className="btn btn-outline-danger mx-2 my-3" onClick={handleDelete}>Clear</button>
             </div>
 
             
@@ -100,12 +101,17 @@ export default function TextForm(props) {
 
             <div className="container my-4" style={{ color: props.mode === 'dark' ? 'white' : 'black' }}>
                 {/* if({text.length > 0} && { }) */}
+
+
                 <p>{
                     text.split(" ").filter((element) => { 
-                        return element.length != 0;
+                        return element.length !== 0;
                     }).length
-                }{ " "}
-                    Words and {text.length} Characters</p>
+                }{" "}
+                    Words and {text.length} Characters
+                </p>
+                
+
                 <p>{number} Numbers</p>
                 <p>{currentElement} is a {numberOrNot}</p>
                 <h2>Preview</h2>

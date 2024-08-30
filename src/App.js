@@ -6,6 +6,7 @@ import About from './About';
 import { useState } from 'react';
 import Alert from './Alert.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './index.css';
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -26,7 +27,8 @@ function App() {
     if (mode === 'light') {
       setMode('dark');
       document.body.style.backgroundColor = '#732d2d';
-      showAlert('Turned into Dark Mode','info')
+      showAlert('Turned into Dark Mode', 'info');
+      // document.title= 'Dark Mode';
     }
     else { 
       setMode('light');
